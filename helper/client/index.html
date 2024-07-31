@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chat</title>
+    </head>
+    <body>
+        <h1>WebSocket Chat</h1>
+        <form action="" onsubmit="sendMessage(event)">
+            <input type="text" id="messageText" autocomplete="off"/>
+            <button>Send</button>
+        </form>
+        <button id="startButton" onclick="startRecording()">Start Recording</button>
+        <ul id='messages'>
+        </ul>
+        <script>
+            var ws = new WebSocket("ws://localhost:8000/ws");
+
+            ws.onmessage = function(event) {
+                var messages = document.getElementById('messages');
+                var message = document.createElement('li');
+                var content = document.createTextNode(event.data);
+                message.appendChild(content);
+                messages.appendChild(message);
+
+                // Re-enable the start button after audio is submitted
+                if (event.data.includes("Audio message received")) {
+                    document.getElementById("startButton").disabled = false;
+                }
+            };
+
+            function sendMessage(event) {
+                var input = document.getElementById("messageText");
+                ws.send(input.value);
+                input.value = '';
+                event.preventDefault();
+            }
+
+            let mediaRecorder;
+            let audioChunks = [];
+            let recognition;
+            let finalTranscript = '';
+            let silenceTimeout;
+            let sendTranscriptInterval;
+
+            function startRecording() {
+                if (!('webkitSpeechRecognition' in window)) {
+                    alert("Web Speech API is not supported by this browser. Upgrade to the latest version of Chrome.");
+                } else {
+                    recognition = new webkitSpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+
+                    recognition.onstart = function() {
+                        console.log("Voice recognition started.");
+                    };
+
+                    recognition.onresult = function(event) {
+                        clearTimeout(silenceTimeout);
+                        silenceTimeout = setTimeout(stopRecording, 3000); // 3 seconds of silence
+
+                        for (let i = event.resultIndex; i < event.results.length; ++i) {
+                            if (event.results[i].isFinal) {
+                                finalTranscript += event.results[i][0].transcript + ' ';
+                            }
+                        }
+                    };
+
+                    recognition.onerror = function(event) {
+                        console.error("Error occurred in recognition: ", event.error);
+                    };
+
+                    recognition.onend = function() {
+                        console.log("Voice recognition ended.");
+                    };
+
+                    recognition.start();
+                }
+
+                navigator.mediaDevices.getUserMedia({ audio: true })
+                    .then(stream => {
+                        mediaRecorder = new MediaRecorder(stream);
+                        mediaRecorder.start();
+
+                        mediaRecorder.addEventListener("dataavailable", event => {
+                            audioChunks.push(event.data);
+                        });
+
+                        mediaRecorder.addEventListener("stop", () => {
+                            const audioBlob = new Blob(audioChunks, { type: 'audio/wav' });
+                            const reader = new FileReader();
+                            reader.readAsDataURL(audioBlob);
+                            reader.onloadend = () => {
+                                const base64AudioMessage = reader.result;
+                                ws.send(base64AudioMessage);
+                            };
+                            audioChunks = [];
+                        });
+                    });
+
+                sendTranscriptInterval = setInterval(() => {
+                    if (finalTranscript.trim()) {
+                        ws.send(finalTranscript.trim());
+                        finalTranscript = ''; // Reset the transcript after sending
+                    }
+                }, 2000); // Send every 2 seconds
+
+                // Disable the start button
+                document.getElementById("startButton").disabled = true;
+            }
+
+            function stopRecording() {
+                if (mediaRecorder && mediaRecorder.state !== "inactive") {
+                    mediaRecorder.stop();
+                }
+                if (recognition) {
+                    recognition.stop();
+                }
+                clearInterval(sendTranscriptInterval);
+            }
+        </script>
+    </body>
+</html>
