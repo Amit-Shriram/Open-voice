@@ -1,5 +1,4 @@
-# this code is to automate the start and stop recording process
-
+#this is proper code to automate the process of start and stop recoding
 import requests
 import streamlit as st
 import uuid
@@ -215,13 +214,12 @@ if response.status_code == 200:
             with st.chat_message("ai"):
                 st.markdown(response.text)
                 # process_and_play(response.text,"friendly","outputs/ai_audio.wav") 
-                st.session_state.transcription = ""
                 asyncio.run(start_websocket())
                 st.rerun()
         else:
             st.error("Failed to get response from the server.")
         
-        # st.session_state.transcription = ""
+        st.session_state.transcription = ""
 
 else:
     st.error('Failed to retrieve data')
