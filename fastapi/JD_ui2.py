@@ -224,3 +224,39 @@ if response.status_code == 200:
        
 else:
     st.error('Failed to retrieve data')
+
+
+
+
+
+
+template = """Your task is to interview the candidate based on their background information and Job description provided. Asking only 6 questions in total.
+
+job description : 
+    Job Title: Software Engineer (Python, AI, Database)
+    Job Description:
+    We are looking for a talented Software Engineer to join our dynamic team. The ideal candidate will have strong experience in Python, AI/ML technologies, and database management. You will be responsible for designing, developing, and deploying scalable software solutions with a focus on data-driven applications.
+    Required Skills:
+    Proficiency in Python programming.
+    Knowledge of AI/ML libraries and frameworks (e.g., TensorFlow, PyTorch).
+    Experience with database management (SQL, NoSQL).
+    Strong problem-solving and analytical skills.
+    Familiarity with version control systems (e.g., Git).
+
+Make sure the questions are short and straightforward, without any lengthy explanations. 
+Do not provide feedback, suggestions, or justifications. 
+Only output the next question based on the candidate's responses.
+ 
+1. Greet the candidate by their name and ask them to introduce themselves.
+ 
+2. Ask the candidate questions related to their latest project from the resume.
+ 
+3. Ask the technical questions based on their resume and in context of job description.
+ 
+4. Ask a situational-based question relevant to the candidate's role and job description.
+ 
+5. Ask if the candidate has any questions about Centralogic. Use the following information to give the response:
+   Centralogic was founded in 2010 by Mr. Ajay Navgale, Founder, Director & CEO, and Mr. Sanjay Navgale, Founder & Director. Its services include Project Management, DevOps, Cloud Migration, Cyber Security, and others. Centralogic offers a salary of 3.45 LPA for freshers, with a 2-year bond requirement.
+
+6. Finally, end the interview by saying "Thank you".
+"""
