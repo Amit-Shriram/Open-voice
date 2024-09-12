@@ -183,3 +183,35 @@ if response.status_code == 200:
        
 else:
     st.error('Failed to retrieve data')
+
+
+
+
+
+
+
+Job Title: Software Engineer (Python, AI, Database)
+
+Location: [Your Location]
+
+Job Type: Full-time
+
+Job Description:
+
+We are looking for a talented Software Engineer to join our dynamic team. The ideal candidate will have strong experience in Python, AI/ML technologies, and database management. You will be responsible for designing, developing, and deploying scalable software solutions with a focus on data-driven applications.
+
+Key Responsibilities:
+
+Design, develop, and maintain software applications using Python.
+Implement AI/ML models and integrate them into existing systems.
+Collaborate with cross-functional teams to define, design, and implement new features.
+Optimize and maintain databases, ensuring data integrity and performance.
+Troubleshoot, debug, and upgrade existing systems.
+Participate in code reviews to ensure best practices in software development.
+Required Skills:
+
+Proficiency in Python programming.
+Knowledge of AI/ML libraries and frameworks (e.g., TensorFlow, PyTorch).
+Experience with database management (SQL, NoSQL).
+Strong problem-solving and analytical skills.
+Familiarity with version control systems (e.g., Git).
