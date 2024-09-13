@@ -288,3 +288,71 @@ Knowledge of AI/ML libraries and frameworks (e.g., TensorFlow, PyTorch).
 Experience with database management (SQL, NoSQL).
 Strong problem-solving and analytical skills.
 Familiarity with version control systems (e.g., Git).
+
+                                                                                                                                                                                                         
+
+                                                                                                                                                                                                         
+                                                                                                                                                                                                         
+
+                                                                                                                                                                                                         
+Job Title: Data Analyst
+
+Location: [Location]
+
+Job Type: Full-time
+
+Overview:
+We are looking for a skilled Data Analyst with a strong background in Python and Machine Learning to join our team. The ideal candidate will have a passion for data, the ability to draw insights from large datasets, and experience in implementing machine learning models to drive business solutions.
+
+Key Responsibilities:
+
+Collect, process, and analyze large datasets to identify trends and insights.
+Develop and maintain dashboards and reports to support decision-making.
+Build and deploy machine learning models to predict key business metrics and improve processes.
+Collaborate with cross-functional teams to understand their data needs and provide actionable insights.
+Clean, preprocess, and ensure data integrity for analysis.
+Use statistical tools to interpret data sets, paying attention to trends and patterns.
+Present findings in a clear and concise manner to stakeholders.
+Qualifications:
+
+Bachelor’s degree in Data Science, Statistics, Computer Science, or a related field.
+Strong proficiency in Python for data analysis (Pandas, NumPy, etc.).
+Experience with machine learning frameworks (e.g., Scikit-learn, TensorFlow).
+Knowledge of data visualization tools such as Matplotlib, Seaborn, or Power BI.
+Experience with SQL for data extraction and manipulation.
+Familiarity with data cleaning, wrangling, and preprocessing techniques.
+Strong analytical and problem-solving skills.
+Good communication skills for presenting insights to technical and non-technical audiences.
+Preferred Skills:
+
+Experience with cloud platforms (AWS, GCP, Azure) is a plus.
+Knowledge of A/B testing and statistical analysis techniques.
+Understanding of database management systems and ETL processes.
+
+                                                                                                                                                                                                         
+
+template = """Your task is to interview the candidate based on their background information and Job description provided. Asking only 6 questions in total.
+Ask only 7 questions as described below.
+
+job description : 
+    {job_description}
+
+Make sure the questions are short and straightforward, without any lengthy explanations. 
+Do not provide feedback, suggestions, or justifications. 
+Only output the next question to be asked.
+ 
+first question, greet the candidate by their name and ask them to introduce themselves.
+ 
+second question, ask the candidate questions related to their latest project from the resume.
+ 
+third question, ask the technical question based on their resume and in context of job description.
+
+forth question, ask the technical question based on their resume and in context of job description.
+
+fifth question, ask a situational-based question relevant to the candidate's role and job description.
+ 
+sixth question, ask as if the candidate has any questions about Centralogic. Use the following information to give the response:
+   Centralogic was founded in 2010 by Mr. Ajay Navgale, Founder, Director & CEO, and Mr. Sanjay Navgale, Founder & Director. Its services include Project Management, DevOps, Cloud Migration, Cyber Security, and others. Centralogic offers a salary of 3.45 LPA for freshers, with a 2-year bond requirement.
+
+Do not give any summary of the interview, just end by saying Thank You after 7th question.
+"""                                                                                                                                                                                                         
